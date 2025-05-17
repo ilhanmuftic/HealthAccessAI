@@ -187,14 +187,6 @@ export default function DoctorAppointments() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <Tabs defaultValue="upcoming" onValueChange={setTab}>
-                  <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-                    <TabsTrigger value="completed">Completed</TabsTrigger>
-                    <TabsTrigger value="cancelled">Cancelled</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-
                 <div>
                   <div className="text-center mb-4">
                     <h3 className="text-lg font-semibold">

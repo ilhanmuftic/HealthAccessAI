@@ -6,7 +6,7 @@ import { MessageSquare, X, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ChatWidgetProps {
-  role: 'doctor' | 'patient';
+  role: "doctor" | "patient";
 }
 
 export function ChatWidget({ role }: ChatWidgetProps) {
@@ -19,6 +19,8 @@ export function ChatWidget({ role }: ChatWidgetProps) {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  console.log(messages);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -35,6 +37,7 @@ export function ChatWidget({ role }: ChatWidgetProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (message.trim()) {
       sendMessage(message, role);
       setMessage("");
@@ -44,7 +47,7 @@ export function ChatWidget({ role }: ChatWidgetProps) {
   return (
     <>
       {/* Chat Widget */}
-      <div 
+      <div
         className={cn(
           "fixed bottom-0 right-0 w-80 bg-white rounded-t-lg shadow-lg transform transition-transform duration-300 ease-in-out z-40 md:right-4",
           isOpen ? "translate-y-0" : "translate-y-full"
@@ -53,20 +56,25 @@ export function ChatWidget({ role }: ChatWidgetProps) {
         <div className="bg-primary text-white p-3 rounded-t-lg">
           <div className="flex justify-between items-center">
             <h3 className="font-medium">AI Health Assistant</h3>
-            <Button variant="ghost" size="icon" className="text-white h-6 w-6" onClick={toggleChat}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white h-6 w-6"
+              onClick={toggleChat}
+            >
               <X className="h-4 w-4" />
             </Button>
           </div>
         </div>
         <div className="p-3 h-80 overflow-y-auto">
           {messages.map((msg) => (
-            <div 
-              key={msg.id} 
+            <div
+              key={msg.id}
               className={cn(
                 "p-3 rounded-lg mb-2 max-w-[80%]",
-                msg.role === "user" 
-                  ? "bg-primary text-white ml-auto" 
-                  : "bg-neutral-light mr-auto"
+                msg.role === "user"
+                  ? "bg-primary text-white ml-auto"
+                  : "bg-neutral-light mr-auto text-black"
               )}
             >
               {msg.content}
@@ -95,7 +103,7 @@ export function ChatWidget({ role }: ChatWidgetProps) {
           </form>
         </div>
       </div>
-      
+
       {/* Chat Toggle Button */}
       <Button
         onClick={toggleChat}
@@ -105,7 +113,11 @@ export function ChatWidget({ role }: ChatWidgetProps) {
         )}
         size="icon"
       >
-        {isOpen ? <X className="h-5 w-5" /> : <MessageSquare className="h-5 w-5" />}
+        {isOpen ? (
+          <X className="h-5 w-5" />
+        ) : (
+          <MessageSquare className="h-5 w-5" />
+        )}
       </Button>
     </>
   );
